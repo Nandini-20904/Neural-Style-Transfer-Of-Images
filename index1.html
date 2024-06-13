@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Style Transfer</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+        p {
+            background-image: url('background.jpg');
+         }
+ 
+        body {
+            background-image: url("background.jpg");
+            background-size: cover;
+            font-family: 'Poppins', sans-serif;
+            color:#333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        
+        .background-animation {
+           
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle, rgba(255, 207, 186, 0.5), rgba(255, 173, 173, 0.5));
+            
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 600px;
+            animation: fadeIn 1s ease-in-out;
+            backdrop-filter: blur(15px);
+            position: relative;
+        }
+        h1 {
+            font-weight: bold;
+            color: #ff6f61;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            animation: slideDown 1s ease-in-out;
+            margin-bottom: 20px;
+        }
+        .btn-primary {
+            background: linear-gradient(to right, #ff6f61, #ff9a9e);
+            border: none;
+            transition: background 0.3s ease, transform 0.3s ease;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 50px;
+            margin-top: 20px;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(to right, #ff9a9e, #ff6f61);
+            transform: scale(1.05);
+        }
+        .form-group label {
+            font-weight: bold;
+            color: #ff6f61;
+        }
+        .form-control-file {
+            border: 2px solid #ff6f61;
+            padding: 10px;
+            border-radius: 8px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+        }
+        .form-control-file:focus {
+            border-color: #ff6f61;
+            box-shadow: 0 0 10px rgba(255, 111, 97, 0.5);
+        }
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #fff;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            }
+            50% {
+                box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            }
+            100% {
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            }
+        }
+        .container:hover {
+            animation: pulse 1s infinite;
+        }
+        .form-group {
+            position: relative;
+        }
+        .form-group::after {
+            content: "";
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            width: calc(100% - 20px);
+            height: 2px;
+            background: linear-gradient(to right, #ff6f61, #ff9a9e);
+            transition: transform 0.3s ease;
+            transform: scaleX(0);
+            transform-origin: left;
+        }
+        .form-control-file:focus ~ .form-group::after {
+            transform: scaleX(1);
+        }}
+    </style>
+</head>
+<body>
+    <p style="background-image: url('background.jpg');">
+    <div class="background-animation"></div>
+    <div class="container">
+        <h1 class="text-center">Neural Style Transfer</h1>
+        <form action="/upload" method="post" enctype="multipart/form-data" class="mt-5">
+            <div class="form-group">
+                <label for="content_image">Upload Content Image</label>
+                <input type="file" class="form-control-file" id="content_image" name="content_image" required>
+            </div>
+            <div class="form-group">
+                <label for="style_image">Upload Style Image</label>
+                <input type="file" class="form-control-file" id="style_image" name="style_image" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
